@@ -1,0 +1,7 @@
+{
+  "name": "backverrueckt-rezepte",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
