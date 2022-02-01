@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   AlertController,
@@ -14,7 +14,7 @@ import { Recipe } from '../recipes.model';
   templateUrl: './recipe-detail.page.html',
   styleUrls: ['./recipe-detail.page.scss'],
 })
-export class RecipeDetailPage implements OnInit, OnDestroy {
+export class RecipeDetailPage implements OnInit {
   recipe: Recipe;
   isLoading = false;
   constructor(
@@ -43,26 +43,7 @@ export class RecipeDetailPage implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    console.log('on-destroy');
-  }
-
-  ionViewDidEnter() {
-    console.log('did-enter');
-  }
-  ionViewDidLeave() {
-    console.log('did-leave');
-  }
-  ionViewDidLoad() {
-    console.log('did-load');
-  }
-  ionViewWillEnter() {}
-  ionViewWillLeave() {
-    console.log('will-leave');
-  }
-
   onEditRecipe() {
-    console.log('edit');
     this.modalController
       .create({
         component: EditRecipeComponent,
@@ -99,8 +80,8 @@ export class RecipeDetailPage implements OnInit, OnDestroy {
                 .deleteRecipeById(this.recipe.id)
                 .subscribe((rec) => {
                   console.log(rec);
+                  this.router.navigate(['/recipes']);
                 });
-              this.router.navigate(['/recipes']);
             },
           },
         ],

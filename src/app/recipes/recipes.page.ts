@@ -18,7 +18,6 @@ export class RecipesPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    console.log('will-enter');
     this.isLoading = true;
     this.recipesService.fetchRecipes().subscribe();
     this.recipesService.getRecipes().subscribe((recipe) => {

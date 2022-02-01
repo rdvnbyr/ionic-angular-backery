@@ -29,7 +29,6 @@ export class SignupPage implements OnInit {
         const { email, password } = form.value;
         this.authService.signUp(email, password).subscribe(
           (res) => {
-            console.log(res);
             loadingElement.dismiss();
             form.reset();
             this.router.navigateByUrl('/auth/login');

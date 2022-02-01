@@ -9,6 +9,7 @@ import { User } from './user.model';
 import { Storage } from '@capacitor/storage';
 
 // https://firebase.google.com/docs/reference/rest/auth
+// https://academind.com/tutorials/understanding-rxjs
 interface AuthFirebaseRespond {
   kind: string;
   idToken: string;
@@ -143,19 +144,16 @@ export class AuthService implements OnDestroy {
     userId: string,
     email: string
   ) {
-    const setName = async () => {
-      const value: StoredData = {
-        userId,
-        token,
-        tokenExpTime,
-        email,
-      };
-      await Storage.set({
-        key: 'crafts-unfolded',
-        value: JSON.stringify(value),
-      });
+    const value: StoredData = {
+      userId,
+      token,
+      tokenExpTime,
+      email,
     };
-    setName()
+    Storage.set({
+      key: 'crafts-unfolded',
+      value: JSON.stringify(value),
+    })
       .then((res) => {
         console.log(res);
       })
