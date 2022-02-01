@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Die Bäckerei</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form #f="ngForm" (ngSubmit)="signUpHandler(f)">
+        <ion-item>
+          <ion-label position="floating">E-Mail</ion-label>
+          <ion-input
+            name="email"
+            type="email"
+            [(ngModel)]="email"
+            required
+            email
+            #emailValidator="ngModel"
+          ></ion-input>
+          <small *ngIf="!emailValidator.valid && emailValidator.touched"
+            >Email should be valid.</small
+          >
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input
+            type="password"
+            ngModel
+            name="password"
+            required
+            minlength="6"
+            #passwordValidator="ngModel"
+          ></ion-input>
+          <small *ngIf="!passwordValidator.valid && passwordValidator.touched"
+            >Password should be min 6 characters.</small
+          >
+        </ion-item>
+
+        <ion-button
+          [disabled]="!f.valid"
+          type="submit"
+          expand="full"
+          color="success"
+          >Sign Up</ion-button
+        >
+      </form>
+
+      <ion-item>
+        <small>Have you already an account ?</small>
+        <ion-button
+          type="button"
+          routerLink="/auth/login"
+          size="small"
+          color="info"
+          fill="clear"
+        >
+          Login
+        </ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

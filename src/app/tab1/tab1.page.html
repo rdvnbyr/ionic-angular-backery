@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title> Tab 1 </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,5 +11,11 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <p>{{text}}</p>
+  <ion-button
+    color="medium"
+    size="large"
+    (click)="onChangeText()"
+    ><ion-icon slot="start" name="star"></ion-icon>Button</ion-button
+  >
 </ion-content>
