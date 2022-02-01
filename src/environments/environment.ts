@@ -4,7 +4,7 @@
 import { firebase } from '../../env';
 export const environment = {
   production: false,
-  firebaseAPiKey: firebase.apiKey || '',
+  firebaseAPiKey: 'AIzaSyB12Yr1t3zbxNzk-toXQv6zHHxJmIybl8E',
 };
 
 /*
