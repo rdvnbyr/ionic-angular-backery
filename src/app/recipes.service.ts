@@ -9,7 +9,7 @@ import { AuthService } from './auth/auth.service';
 interface FetchedRecipe {
   createdAt: Date;
   imageUrl: string;
-  ingredients: { material: string; size: string }[];
+  ingredients: string;
   preparation: string;
   title: string;
   userId: string;
@@ -20,47 +20,53 @@ interface FetchedRecipe {
 })
 export class RecipesService {
   private recipes = new BehaviorSubject<Recipe[]>([]);
+  private userId: string;
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getRecipes() {
     return this.recipes.asObservable();
   }
   fetchRecipes() {
-    const userId = 'user1';
-    return this.http
-      .get<{ [key: string]: FetchedRecipe }>(
-        `https://crafts-unfolded-default-rtdb.europe-west1.firebasedatabase.app/recipes.json?orderBy="userId"&equalTo="${userId}"`
-      )
-      .pipe(
-        map((res) => {
-          const newRecipes = [];
-          for (const key in res) {
-            if (res.hasOwnProperty(key)) {
-              const { title, imageUrl, ingredients, preparation, createdAt } =
-                res[key];
-              const newRecipe: Recipe = {
-                title,
-                imageUrl,
-                ingredients,
-                preparation,
-                createdAt,
-                userId,
-                id: key,
-              };
-              newRecipes.push(newRecipe);
-            }
+    return this.authService.getUserId.pipe(
+      take(1),
+      switchMap((userId) => {
+        if (!userId) {
+          throw new Error('user id not found');
+        }
+        this.userId = userId;
+        return this.http.get<{ [key: string]: FetchedRecipe }>(
+          `https://crafts-unfolded-default-rtdb.europe-west1.firebasedatabase.app/backerei.json?orderBy="userId"&equalTo="${userId}"`
+        );
+      }),
+      map((res) => {
+        const newRecipes = [];
+        for (const key in res) {
+          if (res.hasOwnProperty(key)) {
+            const { title, imageUrl, ingredients, preparation, createdAt } =
+              res[key];
+            const newRecipe: Recipe = {
+              title,
+              imageUrl,
+              ingredients,
+              preparation,
+              createdAt,
+              userId: this.userId,
+              id: key,
+            };
+            newRecipes.push(newRecipe);
           }
-          return newRecipes;
-        }),
-        tap((recipes) => {
-          this.recipes.next(recipes);
-        })
-      );
+        }
+        return newRecipes;
+      }),
+      tap((recipes) => {
+        this.recipes.next(recipes);
+      })
+    );
   }
   getRecipeById(recipeId: string) {
     return this.http
       .get(
-        `https://crafts-unfolded-default-rtdb.europe-west1.firebasedatabase.app/recipes/${recipeId}.json`
+        `https://crafts-unfolded-default-rtdb.europe-west1.firebasedatabase.app/backerei/${recipeId}.json`
       )
       .pipe(
         map((resp) => {
@@ -75,7 +81,7 @@ export class RecipesService {
   deleteRecipeById(recipeId: string) {
     return this.http
       .delete(
-        `https://crafts-unfolded-default-rtdb.europe-west1.firebasedatabase.app/recipes/${recipeId}.json`
+        `https://crafts-unfolded-default-rtdb.europe-west1.firebasedatabase.app/backerei/${recipeId}.json`
       )
       .pipe(
         switchMap(() => this.recipes),
@@ -85,7 +91,12 @@ export class RecipesService {
         })
       );
   }
-  createRecipe(title: string, preparation: string, imageUrl: string) {
+  createRecipe(
+    title: string,
+    preparation: string,
+    imageUrl: string,
+    ingredients: string
+  ) {
     return this.authService.getUserId.pipe(
       take(1),
       switchMap((userId) => {
@@ -96,17 +107,13 @@ export class RecipesService {
           id: '',
           title,
           preparation,
-          ingredients: [
-            { material: 'floor', size: '200gr' },
-            { material: 'oil', size: '5gr' },
-            { material: 'salz', size: '2gr' },
-          ],
+          ingredients,
           createdAt: new Date(),
           imageUrl,
-          userId: 'user1',
+          userId,
         };
         return this.http.post<{ name: string }>(
-          'https://crafts-unfolded-default-rtdb.europe-west1.firebasedatabase.app/recipes.json',
+          `https://crafts-unfolded-default-rtdb.europe-west1.firebasedatabase.app/backerei.json`,
           { ...newwRecipe, id: null }
         );
       }),
@@ -119,9 +126,9 @@ export class RecipesService {
     recipeId: string,
     title: string,
     preparation: string,
-    imageUrl: string
+    imageUrl: string,
+    ingredients: string
   ) {
-    console.log({ recipeId, title, preparation, imageUrl });
     let updatedRecipes: Recipe[];
     return this.recipes.pipe(
       take(1),
@@ -134,13 +141,13 @@ export class RecipesService {
       }),
       switchMap((recipes) => {
         const index = recipes.findIndex((rp) => rp.id === recipeId);
-
         updatedRecipes = [...recipes];
         updatedRecipes[index] = {
           ...updatedRecipes[index],
           title,
           preparation,
           imageUrl,
+          ingredients,
         };
         return this.http.put(
           `https://crafts-unfolded-default-rtdb.europe-west1.firebasedatabase.app/recipes/${recipeId}.json`,

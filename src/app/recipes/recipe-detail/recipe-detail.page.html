@@ -4,11 +4,8 @@
       <ion-back-button defaultHref="/recipes"></ion-back-button>
     </ion-buttons>
     <ion-title>{{recipe.title}}</ion-title>
-    <ion-buttons (click)="onEditRecipe()" slot="end">
-      <ion-icon name="create" slot="icon-only"></ion-icon>
-    </ion-buttons>
     <ion-buttons (click)="onDeleteRecipe()" slot="end">
-      <ion-icon name="trash" slot="icon-only"></ion-icon>
+      <ion-icon  name="trash" slot="icon-only"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -22,11 +19,14 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-list>
-          <ion-item *ngFor="let ing of recipe.ingredients">
-            {{ing.material}} & {{ing.size}}</ion-item
-          >
-        </ion-list>
+        <ion-item>{{ recipe.ingredients}}</ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <p>{{ recipe.preparation}}</p>
+        </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -2,11 +2,12 @@ export interface Recipe {
   id: string;
   title: string;
   imageUrl: string;
-  ingredients: {
-    material: string;
-    size?: string;
-    descrition?: string;
-  }[];
+  // ingredients: {
+  //   material: string;
+  //   size?: string;
+  //   descrition?: string;
+  // }[];
+  ingredients: string;
   preparation: string;
   createdAt: Date;
   userId?: string;

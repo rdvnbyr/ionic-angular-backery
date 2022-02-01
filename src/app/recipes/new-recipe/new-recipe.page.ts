@@ -32,6 +32,10 @@ export class NewRecipePage implements OnInit {
         updateOn: 'blur',
         validators: [Validators.required],
       }),
+      ingredients: new FormControl(null, {
+        updateOn: 'blur',
+        validators: [Validators.required],
+      }),
     });
   }
 
@@ -49,7 +53,8 @@ export class NewRecipePage implements OnInit {
           .createRecipe(
             this.form.value.title,
             this.form.value.preparation,
-            this.form.value.imageUrl
+            this.form.value.imageUrl,
+            this.form.value.ingredients
           )
           .subscribe(
             () => {

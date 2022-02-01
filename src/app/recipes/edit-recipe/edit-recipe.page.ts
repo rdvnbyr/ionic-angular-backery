@@ -34,13 +34,17 @@ export class EditRecipePage implements OnInit {
         .getRecipeById(this.recipeId)
         .subscribe((recipe: Recipe) => {
           this.recipe = recipe;
-          const { title, imageUrl, preparation } = this.recipe;
+          const { title, imageUrl, preparation, ingredients } = this.recipe;
           this.form = new FormGroup({
             title: new FormControl(title, {
               updateOn: 'blur',
               validators: [Validators.required],
             }),
             imageUrl: new FormControl(imageUrl, {
+              updateOn: 'blur',
+              validators: [Validators.required],
+            }),
+            ingredients: new FormControl(ingredients, {
               updateOn: 'blur',
               validators: [Validators.required],
             }),
@@ -57,9 +61,9 @@ export class EditRecipePage implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    const { title, imageUrl, preparation } = this.form.value;
+    const { title, imageUrl, preparation, ingredients } = this.form.value;
     this.recipesService
-      .updateRecipe(this.recipe.id, title, preparation, imageUrl)
+      .updateRecipe(this.recipe.id, title, preparation, imageUrl, ingredients)
       .subscribe(() => {
         this.form.reset();
         this.router.navigateByUrl('/recipes');
