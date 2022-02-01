@@ -2,4 +2,5 @@
 
 Still developing
 
-Will be published soon.
+published with vercel.
+# https://ionic-backerei.vercel.app/
