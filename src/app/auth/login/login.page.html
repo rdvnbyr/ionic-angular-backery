@@ -1,65 +1,85 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Die Backerei</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Dream come through</ion-card-subtitle>
-      <ion-card-title>Die Bäckerei</ion-card-title>
-    </ion-card-header>
+  <ion-grid fixed>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Come and make it!</ion-card-subtitle>
+        <ion-card-title>Login</ion-card-title>
+      </ion-card-header>
 
-    <ion-card-content>
-      <form #f="ngForm" (ngSubmit)="loginHandler(f)">
-        <ion-item>
-          <ion-label position="floating">E-Mail</ion-label>
-          <ion-input
-            name="email"
-            type="email"
-            [(ngModel)]="email"
-            required
-            email
-            #emailValidator="ngModel"
-          ></ion-input>
-          <small *ngIf="!emailValidator.valid && emailValidator.touched"
-            >Email should be valid.</small
-          >
-        </ion-item>
-
-        <ion-item>
-          <ion-label position="floating">Password</ion-label>
-          <ion-input
-            type="password"
-            ngModel
-            name="password"
-            required
-            minlength="6"
-            #passwordValidator="ngModel"
-          ></ion-input>
-          <small *ngIf="!passwordValidator.valid && passwordValidator.touched"
-            >Password should be min 6 characters.</small
-          >
-        </ion-item>
-
-        <ion-button [disabled]="!f.valid" type="submit" expand="full"
-          >Login</ion-button
-        >
-      </form>
-
-      <ion-item>
-        <small>Have you not an account ?</small>
-        <ion-button
-          type="button"
-          routerLink="/auth/signup"
-          size="small"
-          color="success"
-          fill="clear"
-        >
-          Sign up
-        </ion-button>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+      <ion-card-content>
+        <form #f="ngForm" (ngSubmit)="loginHandler(f)">
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col class="ion-text-center" size-md="6" offset-md="3">
+                <ion-item>
+                  <ion-label position="floating">E-Mail</ion-label>
+                  <ion-input
+                    name="email"
+                    type="email"
+                    [(ngModel)]="email"
+                    required
+                    email
+                    #emailValidator="ngModel"
+                    autocomplete
+                    autocorrect
+                  ></ion-input>
+                  <small *ngIf="!emailValidator.valid && emailValidator.touched"
+                    >Email should be valid.</small
+                  >
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-center" size-md="6" offset-md="3">
+                <ion-item>
+                  <ion-label position="floating">Password</ion-label>
+                  <ion-input
+                    type="password"
+                    ngModel
+                    name="password"
+                    required
+                    minlength="6"
+                    #passwordValidator="ngModel"
+                  ></ion-input>
+                  <small
+                    *ngIf="!passwordValidator.valid && passwordValidator.touched"
+                    >Password should be min 6 characters.</small
+                  >
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-text-center" size-md="6" offset-md="3">
+                <ion-button [disabled]="!f.valid" type="submit" expand="full"
+                  >Login</ion-button
+                >
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+        <ion-row>
+          <ion-col class="ion-text-center" size-md="6" offset-md="3">
+            <ion-item>
+              <small>Have you not an account ?</small>
+              <ion-button
+                type="button"
+                routerLink="/auth/signup"
+                size="small"
+                color="success"
+                fill="clear"
+              >
+                Sign up
+              </ion-button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-grid>
 </ion-content>

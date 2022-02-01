@@ -1,10 +1,10 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { firebase } from '../../env';
+
 export const environment = {
   production: false,
-  firebaseAPiKey: firebase.apiKey,
+  firebaseAPiKey: 'AIzaSyB12Yr1t3zbxNzk-toXQv6zHHxJmIybl8E',
 };
 
 /*

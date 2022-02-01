@@ -11,21 +11,21 @@
   <form [formGroup]="form">
     <ion-grid fixed>
       <ion-row>
-        <ion-col size-sm="12" offsetSm="12">
+        <ion-col class="ion-text-center" size-md="6" offset-md="3">
           <ion-item>
             <ion-label position="floating">Title</ion-label>
             <ion-input
               type="text"
+              formControlName="title"
               autocomplete
               autocorrect
-              formControlName="title"
             ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col size-sm="12" offsetSm="12">
+        <ion-col class="ion-text-center" size-md="6" offset-md="3">
           <ion-item>
             <ion-label position="floating">Image Url</ion-label>
             <ion-input type="text" formControlName="imageUrl"></ion-input>
@@ -33,7 +33,7 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size-sm="12" offsetSm="12">
+        <ion-col class="ion-text-center" size-md="6" offset-md="3">
           <ion-item>
             <ion-label position="floating">Ingredients</ion-label>
             <ion-textarea rows="3" formControlName="ingredients"></ion-textarea>
@@ -41,7 +41,7 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size-sm="12" offsetSm="12">
+        <ion-col class="ion-text-center" size-md="6" offset-md="3">
           <ion-item>
             <ion-label position="floating">Praparation</ion-label>
             <ion-textarea rows="3" formControlName="preparation"></ion-textarea>
@@ -49,7 +49,7 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col size-sm="12" offsetSm="12">
+        <ion-col class="ion-text-center" size-md="6" offset-md="3">
           <ion-button
             (click)="onCreateRecipe()"
             [disabled]="!form.valid"
