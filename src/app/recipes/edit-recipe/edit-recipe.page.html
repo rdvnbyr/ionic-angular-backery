@@ -1,7 +1,10 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/recipes"></ion-back-button>
+    </ion-buttons>
     <ion-title>Edit Recipe</ion-title>
-    <ion-buttons slot="primary">
+<!--     <ion-buttons slot="primary">
       <ion-button fill="clear" (click)="closeEditRecipe()">
         <ion-icon
           slot="end"
@@ -10,7 +13,7 @@
           size="large"
         ></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -62,7 +65,7 @@
             [disabled]="!form?.valid"
             type="submit"
             expand="full"
-            color="primary"
+            color="tertiary"
             >Save</ion-button
           >
         </ion-col>

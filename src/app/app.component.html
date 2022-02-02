@@ -1,14 +1,22 @@
 <ion-app>
   <ion-menu side="start" menuId="first" contentId="main">
     <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Start Menu</ion-title>
+      <ion-toolbar color="tertiary">
+        <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item>Home</ion-item>
-        <ion-item lines="none" (click)="onLogout()">Logout</ion-item>
+        <ion-item lines="none">
+          <ion-button
+            (click)="onLogout()"
+            expand="full"
+            fill="clear"
+            color="danger"
+          >
+            Logout
+          </ion-button>
+        </ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>

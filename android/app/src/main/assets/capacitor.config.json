@@ -1,0 +1,6 @@
+{
+	"appId": "ionic.bakery.app",
+	"appName": "backverrueckt-rezepte",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

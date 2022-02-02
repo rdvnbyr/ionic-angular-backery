@@ -4,9 +4,10 @@
       <ion-back-button defaultHref="/recipes"></ion-back-button>
     </ion-buttons>
     <ion-title>{{recipe.title}}</ion-title>
-    <ion-buttons (click)="onDeleteRecipe()" slot="end">
-      <ion-icon name="trash" slot="icon-only"></ion-icon>
-    </ion-buttons>
+    <ion-button (click)="onDeleteRecipe()" slot="end" color="danger" class="ion-margin">
+      <ion-icon slot="start" name="trash"></ion-icon>
+      Delete
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +15,7 @@
   <ion-grid no-padding *ngIf="!isLoading">
     <ion-row no-padding>
       <ion-col class="ion-text-center" size-md="6" offset-md="3">
-        <ion-img [src]="recipe.imageUrl"></ion-img>
+        <ion-img  [src]="recipe.imageUrl"></ion-img>
       </ion-col>
     </ion-row>
     <ion-row>
